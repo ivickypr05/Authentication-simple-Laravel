@@ -37,10 +37,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create([
-            'name'=>$request->input('category_name'),
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:50',
         ]);
-        return redirect('/category');
+        
+        Category::create($validatedData);
+        return redirect('/category')->with('toast_success', 'Category Created Successfully!');;
     }
 
     /**
@@ -76,10 +78,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Category::where('id', $id)->update([
-            'name'=>$request->input('category_name'),
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:50',
         ]);
-        return redirect('/category');
+        Category::where('id', $id)->update($validatedData);
+        return redirect('/category')->with('toast_success', 'Category Updated Successfully!');;
     }
 
     /**

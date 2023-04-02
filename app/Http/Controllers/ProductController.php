@@ -45,23 +45,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'name' => 'required|string|min:2|max:50',
-        //     'price' => 'required|integer',
-        //     'description' => 'required|string|min:5|max:255',
-        //     'image' => 'required|string',
-        //     'category_id' => 'required|integer|exists:categories,id',
-        // ]);
-        // Product::create($validatedData);
-        // return redirect('/product');
-        Product::create([
-            'name'=>$request->input('product_name'),
-            'price'=>$request->input('product_price'),
-            'description'=>$request->input('product_description'),
-            'image'=>$request->input('product_image'),
-            'category_id'=>$request->input('category_id'),
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:50',
+            'price' => 'required|integer',
+            'description' => 'required|string|min:5|max:255',
+            'image' => 'required|string',
+            'category_id' => 'required|integer|exists:categories,id',
         ]);
-        return redirect('/product');
+        Product::create($validatedData);
+        return redirect('/product')->with('toast_success', 'Product Created Successfully!');;
+        // Product::create([
+        //     'name'=>$request->input('product_name'),
+        //     'price'=>$request->input('product_price'),
+        //     'description'=>$request->input('product_description'),
+        //     'image'=>$request->input('product_image'),
+        //     'category_id'=>$request->input('category_id'),
+        // ]);
+        // return redirect('/product');
     }
 
     /**
@@ -98,14 +98,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Product::where('id', $id)->update([
-            'name'=>$request->input('product_name'),
-            'price'=>$request->input('product_price'),
-            'description'=>$request->input('product_description'),
-            'image'=>$request->input('product_image'),
-            'category_id'=>$request->input('category_id')
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:50',
+            'price' => 'required|integer',
+            'description' => 'required|string|min:5|max:255',
+            'image' => 'required|string',
+            'category_id' => 'required|integer|exists:categories,id',
         ]);
-        return redirect('/product');
+        Product::where('id', $id)->update($validatedData);
+        return redirect('/product')->with('toast_success', 'Product Updated Successfully!');;
     }
 
     /**
@@ -117,6 +118,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-        return redirect('/product');
+        return redirect('/product')->with('toast_success', 'Product Deleted Successfully!');;
     }
 }
