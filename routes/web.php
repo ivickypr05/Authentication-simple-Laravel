@@ -26,7 +26,11 @@ Route::get('login', [SessionController::class, 'index'])->name('login');
 Route::post('auth/login', [SessionController::class, 'login']);
 Route::get('auth/logout', [SessionController::class, 'logout']);
 
+//untuk register
+Route::get('register',[SessionController::class,'register']);
+Route::post('auth/register', [SessionController::class, 'doregister']);
 
+//seluruh page dimulai dengan login
 Route::middleware(['auth'])->group(function () {
 //untuk read data home
 Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -65,5 +69,6 @@ Route::get('admin/{id}/deletecategory', [CategoryController::class, 'destroy']);
 Route::resource ('/tocart', CartController::class);
 //untuk delete data Cart
 Route::get('cart/{id}/delete', [CartController::class, 'destroy']);
+Route::get('cart/{id}/checkout', [CartController::class, 'checkout']);
 
 });

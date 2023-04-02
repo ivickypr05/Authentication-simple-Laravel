@@ -52,7 +52,7 @@ class CartController extends Controller
         $productAdd->save();
     }
 
-    return redirect('/cart');
+    return redirect('/cart')->with('success','successfully added to cart');
 }
 
     /**
@@ -100,5 +100,11 @@ class CartController extends Controller
     {
         Cart::destroy($id);
         return redirect('/cart');
+    }
+
+    public function checkout($id)
+    {
+        Cart::destroy($id);
+        return redirect('/cart')->with('success', 'Thanks for your shopping');
     }
 }

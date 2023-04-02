@@ -94,7 +94,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-        return redirect('/category');
+        return redirect('/category')->with('toast_success', 'Category Deleted Successfully!');;
     }
 }
 // $validated = $request->validate([

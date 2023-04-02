@@ -19,9 +19,7 @@
                         </p>
                         <a href="cart/{{ $cart->id }}/delete" class="btn btn-xs btn-danger"
                             onclick="return confirm('Are u Sure?');">Delete</a>
-                        <a href="cart/{{ $cart->id }}/delete" class="btn btn-xs btn-warning"
-                            onclick="alert('Terima kasih anda telah checkout!, silahkan tunggu produk sampai ke tempat anda')">Check
-                            Out</a>
+                        <a href="cart/{{ $cart->id }}/checkout" class="btn btn-xs btn-warning">Checkout</a>
                     </div>
                 </div>
             @endforeach
