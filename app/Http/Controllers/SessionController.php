@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class SessionController extends Controller
@@ -43,32 +47,35 @@ class SessionController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
         return redirect('login')->with('success','Success logout');
     }
     
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function register()
     {
-        //
+        return view("auth/register");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function doregister(Request $request)
     {
-        //
+        Session::flash('name', $request->name);
+        Session::flash('email', $request->email);
+
+        $validatedData = $request->validate([
+            'name' =>'required|string|max:100',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8'
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        
+        User::create($validatedData) ;
+        return redirect('register')->with('success', 'Success Registration');
     }
 
     /**
