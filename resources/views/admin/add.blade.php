@@ -11,7 +11,7 @@
             <p>Please fill in the data below!</p>
             <div class="col-lg-8">
                 <div class="container">
-                    <form method="POST" action="{{ url('/product') }}">
+                    <form method="POST" action="{{ url('/product') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Item Name</label>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="text" class="form-control @error('image') is-invalid @enderror" id="image"
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
                                 name="image">
                             @error('image')
                                 <div class="invalid-feedback">

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -49,19 +50,16 @@ class ProductController extends Controller
             'name' => 'required|string|min:2|max:50',
             'price' => 'required|integer',
             'description' => 'required|string|min:5|max:255',
-            'image' => 'required|string',
+            'image' => 'required|mimes:jpeg,jpg,png,gif',
             'category_id' => 'required|integer|exists:categories,id',
         ]);
+        // $image_name = $request->image->getClientOriginalName();
+        // $image = $request->image->storeAs('image', $image_name);
+        $image = $request->file('image')->store('product-image','public');
+        $validatedData['image'] = $image;
+
         Product::create($validatedData);
         return redirect('/product')->with('toast_success', 'Product Created Successfully!');;
-        // Product::create([
-        //     'name'=>$request->input('product_name'),
-        //     'price'=>$request->input('product_price'),
-        //     'description'=>$request->input('product_description'),
-        //     'image'=>$request->input('product_image'),
-        //     'category_id'=>$request->input('category_id'),
-        // ]);
-        // return redirect('/product');
     }
 
     /**
@@ -102,12 +100,24 @@ class ProductController extends Controller
             'name' => 'required|string|min:2|max:50',
             'price' => 'required|integer',
             'description' => 'required|string|min:5|max:255',
-            'image' => 'required|string',
+            'image' => 'required|mimes:jpg,png,jpeg,gif',
             'category_id' => 'required|integer|exists:categories,id',
         ]);
-        Product::where('id', $id)->update($validatedData);
+        
+        $product = Product::find($id);
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('product-image','public' );
+            // dd($image);
+            // delete
+            File::delete('storage/' .  $product->image );
+            // $product->delete();
+            $validatedData['image'] = $image;
+            // dd($validatedData['image']);
+        }
+        $product->update($validatedData);
+        
         return redirect('/product')->with('toast_success', 'Product Updated Successfully!');;
-    }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -115,9 +125,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy(Request $request, $id)
+    // {
+    //     Product::destroy($id);
+    //     File::delete('storage/' . $request->image);
+        
+    //     return redirect('/product')->with('toast_success', 'Product Deleted Successfully!');;
+    // }
+    public function destroy(Product $product, $id)
     {
-        Product::destroy($id);
-        return redirect('/product')->with('toast_success', 'Product Deleted Successfully!');;
+        $product = Product::find($id);
+        File::delete('storage/' .  $product->image );
+        $product->delete();
+        return redirect('/product')->with('toast_success', 'Data successfully deleted');
     }
 }

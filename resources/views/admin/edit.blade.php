@@ -12,7 +12,7 @@
                 <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
                 <p>Please Edit in the data below!</p>
                 <div class="col-lg-8">
-                    <form method="post" action="/product/{{ $product->id }}">
+                    <form method="post" action="/product/{{ $product->id }}" enctype="multipart/form-data">
                         @method('put')
                         @csrf
                         <div class="mb-3">
@@ -45,10 +45,15 @@
                                 </div>
                             @enderror
                         </div>
+                        @if ($product->image)
+                            <div class="mb-3">
+                                <img src="{{ url('storage/' . $product->image) }}" width="70px" alt="">
+                            </div>
+                        @endif
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="text" class="form-control @error('image') is-invalid @enderror" id="image"
-                                name="image" value="{{ $product->image }}">
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
+                                name="image">
                             @error('image')
                                 <div class="invalid-feedback">
                                     {{ $message }}

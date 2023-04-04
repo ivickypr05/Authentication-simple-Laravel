@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $cart->product->name }}</h5>
                         <p class="card-text">
-                            <strong>Category : {{ $cart->product->category->name }}</strong><br>
+                            <strong> Category : {{ $cart->product->category->name }}</strong><br>
                             <strong> Price : Rp.{{ number_format($cart->product->price) }}</strong> <br>
                             <strong> Quantity : {{ $cart->qty }}</strong>
                         </p>
