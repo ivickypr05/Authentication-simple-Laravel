@@ -17,8 +17,8 @@
 
 
 ## :camera: Documentation
-* Login Default :
 
+* Login Default :
        
        Email : vicky@ciky.com
        
@@ -28,9 +28,11 @@
 
 https://user-images.githubusercontent.com/109125641/229699932-45cec32c-4a20-475d-b94c-79abdae1dd08.mp4
 
+
 * Register
 
 https://user-images.githubusercontent.com/109125641/229699968-4e99c232-9681-40f0-8f05-c02cf4bddbe7.mp4
+
 
 ## :open_book: How To Use
 1.  Clone this repository
