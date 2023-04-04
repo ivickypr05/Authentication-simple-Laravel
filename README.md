@@ -69,5 +69,5 @@ https://user-images.githubusercontent.com/109125641/229699968-4e99c232-9681-40f0
     ```
  
 ### :link: Creator
-[![instagram](https://img.shields.io/badge/instagram-833AB4?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/ivickypr)
+[![instagram](https://img.shields.io/badge/instagram-833AB4?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/ivickypr_)
 [![github](https://img.shields.io/badge/github-333?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ivickypr05)
