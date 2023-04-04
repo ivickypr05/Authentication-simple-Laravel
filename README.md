@@ -24,7 +24,6 @@
        
        Password : kepobanget
       
-    
 
 https://user-images.githubusercontent.com/109125641/229699932-45cec32c-4a20-475d-b94c-79abdae1dd08.mp4
 
@@ -68,3 +67,7 @@ https://user-images.githubusercontent.com/109125641/229699968-4e99c232-9681-40f0
     ```
     php artisan serve
     ```
+ 
+### :link: About Creator
+[![instagram](https://img.shields.io/badge/instagram-833AB4?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/ivickypr)
+[![github](https://img.shields.io/badge/github-333?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ivickypr05)
