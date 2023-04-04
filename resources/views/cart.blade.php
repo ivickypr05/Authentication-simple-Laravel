@@ -5,7 +5,7 @@
         <div class="d-flex row justify-content-start gap-3">
             @foreach ($carts as $cart)
                 <div class="col-3 card" style="width: 15rem;">
-                    <img src="{{ url('assets/image/' . $cart->product->image) }}" class="card-img-top" alt="hedset">
+                    <img src="{{ url('storage/' . $cart->product->image) }}" class="card-img-top" alt="hedset">
                     <div class="card-body">
                         <h5 class="card-title">{{ $cart->product->name }}</h5>
                         <p class="card-text">
